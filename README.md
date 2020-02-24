@@ -5,7 +5,23 @@
 # What need to be installed
 ```
   1. Ceres Solver
+     sudo apt-get install cmake
+     sudo apt-get install libgoogle-glog-dev
+     sudo apt-get install libatlas-base-dev
+     sudo apt-get install libsuitesparse-dev
+     mkdir ceres-bin
+     cd ceres-bin
+     wget http://ceres-solver.org/ceres-solver-1.14.0.tar.gz
+     tar zxf ceres-solver-1.14.0.tar.gz
+     mkdir ceres-bin
+     cd ceres-bin/
+     cmake ../ceres-solver-1.14.0
+     make -j3
+     make test
+     sudo make install
+
   2. Opencv 3.1
+  
   3. Eigen 3.2.0
   4. boost
   5. Pangolin
