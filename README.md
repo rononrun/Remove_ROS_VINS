@@ -20,12 +20,38 @@
      make test
      sudo make install
 
-  2. Opencv 3.1
+  2. VTK
+     # vins_estimator requires the library libopencv_viz.so, which Opencv compiler will generate only if VTK is installed. 
+     sudo apt-get install libvtk5-qt4-dev
+
+  3. Opencv 3.1
+     mkdir opencv345
+     cd opencv345
+     git clone -b 3.4.5 https://github.com/opencv/opencv
+     cd opencv ; git checkout 3.1.0 ; cd ..
+     git clone -b 3.4.5 https://github.com/opencv/opencv_contrib
+     cd opencv_contrib ; git checkout 3.1.0 ; cd ..
+     # Manually fix the sign() issue which causes compile-time error (persist in version 3.1.0):     
+         https://github.com/opencv/opencv_contrib/commit/395db9e7211d58473beafa6a9643d3cd49ad4eb4
+     # Manually fix the HDF5 library issue:
+         https://github.com/opencv/opencv/issues/6050
+     mkdir build
+     cd build/
+     cmake -DOPENCV_ENABLE_NONFREE:BOOL=ON -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules ../opencv
+     make -j8
+     sudo make install
+     sudo ldconfig
   
-  3. Eigen 3.2.0
-  4. boost
-  5. Pangolin
+  4. Eigen 3.2.0
+  
+  5. boost
+     sudo apt-get install libboost*
+     
+  6. Pangolin
+  
+  References: https://wiki.mediatek.inc/pages/viewpage.action?pageId=603491233
 ```
+
 # How to build:
 ```
   1. mkdir VINS_Workspace
