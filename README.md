@@ -24,6 +24,11 @@
      # vins_estimator requires the library libopencv_viz.so, which Opencv compiler will generate only if VTK is installed. 
      sudo apt-get install libvtk5-qt4-dev
 
+  3. GTK (needed for opencv)
+     sudo apt-get install libgtk2.0
+     sudo apt-get install libgtk3.0 (optional)
+     Remark: when doing opencv make, enable flags WITH_GTK and WITH_QT.
+
   3. Opencv 3.1
      mkdir opencv345
      cd opencv345
@@ -37,7 +42,7 @@
          https://github.com/opencv/opencv/issues/6050
      mkdir build
      cd build/
-     cmake -DOPENCV_ENABLE_NONFREE:BOOL=ON -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules ../opencv
+     cmake -DOPENCV_ENABLE_NONFREE:BOOL=ON -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules -DWITH_GTK=ON -DWITH_QT=ON ../opencv
      make -j8
      sudo make install
      sudo ldconfig
