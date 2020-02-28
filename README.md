@@ -26,7 +26,7 @@
 
   3. GTK (needed for opencv)
      sudo apt-get install libgtk2.0
-     sudo apt-get install libgtk3.0 (optional)
+     sudo apt-get install libgtk3.0
      Remark: when doing opencv make, enable flags WITH_GTK and WITH_QT.
 
   3. Opencv 3.1
@@ -49,6 +49,7 @@
      mkdir build
      cd build/
      cmake -DOPENCV_ENABLE_NONFREE:BOOL=ON -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules -DWITH_GTK=ON -DWITH_QT=ON ../opencv
+     # Ensure that QT, GTK, and VTK in the GUI section are all enabled before continuing.
      make -j8
      sudo make install
      sudo ldconfig
@@ -60,7 +61,23 @@
      
   6. Pangolin
   
-  References: https://wiki.mediatek.inc/pages/viewpage.action?pageId=603491233
+To build with tensorflow environment:
+  
+  1. Build environment following Lilian's flow.
+     References: https://wiki.mediatek.inc/pages/viewpage.action?pageId=603491233
+     
+  2. When building tensorflow (before running ./configure), please check if bazel version is 0.26.1.
+     Command to check: bazel version
+     If version is not, please update bazel.
+     sudo rm -rf /usr/bin/bazel /etc/bazelrc /usr/lib/bazel /usr/local/bin/bazel /usr/local/lib/bazel ~/bin/bazel
+     cd ~/volumes/bazel
+     wget https://github.com/bazelbuild/bazel/releases/download/0.26.1/bazel-0.26.1-installer-linux-x86_64.sh
+     chmod +x bazel-0.26.1-installer-linux-x86_64.sh
+     ./bazel-0.26.1-installer-linux-x86_64.sh --user
+     export PATH="$PATH:$HOME/bin"
+     
+     
+
 ```
 
 # How to build:
