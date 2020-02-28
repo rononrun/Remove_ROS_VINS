@@ -37,9 +37,15 @@
      git clone -b 3.4.5 https://github.com/opencv/opencv_contrib
      cd opencv_contrib ; git checkout 3.1.0 ; cd ..
      # Manually fix the sign() issue which causes compile-time error (persist in version 3.1.0):     
-         https://github.com/opencv/opencv_contrib/commit/395db9e7211d58473beafa6a9643d3cd49ad4eb4
+         Refer: https://github.com/opencv/opencv_contrib/commit/395db9e7211d58473beafa6a9643d3cd49ad4eb4
+         Remove the following line from file modules/tracking/include/opencv2/tracking/onlineMIL.hpp
+             #define  sign(s)  ((s > 0 ) ? 1 : ((s<0) ? -1 : 0))
+         Add the above line to file modules/tracking/src/onlineMIL.cpp
      # Manually fix the HDF5 library issue:
-         https://github.com/opencv/opencv/issues/6050
+         Refer: https://github.com/opencv/opencv/issues/6050
+         Add the following lines to the bottom of the file modules/python/common.cmake
+             find_package(HDF5)
+             include_directories(${HDF5_INCLUDE_DIRS})
      mkdir build
      cd build/
      cmake -DOPENCV_ENABLE_NONFREE:BOOL=ON -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules -DWITH_GTK=ON -DWITH_QT=ON ../opencv
